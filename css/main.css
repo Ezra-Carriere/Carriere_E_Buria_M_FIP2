@@ -14,18 +14,26 @@ header {
     background-color: #1e1e1e;
     padding: 1rem 0;
 }
-
 nav {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(150px, auto) 1fr; /* Adjust 150px to the desired minimum width */
     align-items: center;
 }
 
 .logo {
-    color: #ffffff;
-    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    top: 27px; /* Adjust this value as needed for the desired vertical position */
+    left: 300px; /* Adjust this value as needed for the desired horizontal position */
+    grid-column: 1;
 }
-
+.logo img {
+    max-height: 100px;
+    width: auto;
+}
+.hamburger, .nav-links {
+    justify-self: end;
+}
 .hamburger {
     display: inline-block;
     background: transparent;
@@ -43,11 +51,23 @@ nav {
 
 .nav-links {
     display: none;
+    list-style: none;
+    padding: 0;
+    font-size: 20px;
+    position: relative;
+    right: 300px;
+
+}
+
+.nav-links a {
+    text-decoration: none;
+    padding: 0 1rem; /* Adjust these values as needed for the desired padding */
+    color: inherit;
 }
 
 .nav-links li a:hover {
-    background-color: #ffffff;
-    color: #1e1e1e;
+    background-color: #585858;
+    color: #ffffff;
 }
 
 /* Main content styles */
@@ -166,11 +186,46 @@ footer a:hover {
         flex-direction: row;
         justify-content: space-between;
     }
+    nav {
+        grid-template-columns: auto 1fr auto;
+    }
+
+     .hamburger {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 @media screen and (min-width: 1200px) {
     main {
         max-width: 1920px;
         margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .logo img {
+        max-width: 90%;
+        left: 200px;
+    }
+
+
+}
+
+@media screen and (max-width: 991px) {
+    .logo img {
+        max-width: 80%;
+        left: 150px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .logo img {
+        max-width: 70%;
+        left: 100px;
     }
 }
