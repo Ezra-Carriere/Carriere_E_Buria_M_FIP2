@@ -1,84 +1,119 @@
-//hamburger
-document.querySelector('.hamburger-menu').addEventListener('click', function () {
-  this.classList.toggle('open');
-  document.querySelector('.mobile-nav-menu').classList.toggle('open');
+ let slides = document.querySelectorAll('.carousel-slide');
+        let currentSlide = 0;
+        let slideInterval = setInterval(nextSlide, 3000);
+
+        function nextSlide() {
+            slides[currentSlide].classList.add('hidden');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.remove('hidden');
+}
+        
+
+//mobile nav
+const menuIcon = document.querySelector('.menu-icon');
+const mobileNav = document.querySelector('.mobile-nav');
+const closeIcon = document.querySelector('#close-icon');
+
+menuIcon.addEventListener('click', () => {
+  mobileNav.classList.toggle('active');
+  closeIcon.style.display = 'block';
 });
 
-//carousel goes here
-const carouselPrevButton = document.querySelector('.carousel-prev');
-const carouselNextButton = document.querySelector('.carousel-next');
-const carouselItems = document.querySelectorAll('.carousel-item');
+//close mobile nav bar
+closeIcon.addEventListener('click', () => {
+  mobileNav.classList.remove('active');
+  closeIcon.style.display = 'none';
+});
 
-let activeIndex = 0;
+//button animation
+const buttons = document.querySelectorAll('.animated-button');
 
-function updateCarousel() {
-  carouselItems.forEach((item, index) => {
-    if (index === activeIndex) {
-      item.classList.add('active');
-    } else {
-      item.classList.remove('active');
-    }
+buttons.forEach((button) => {
+  button.addEventListener('mouseenter', (event) => {
+    const x = event.clientX - button.getBoundingClientRect().left;
+    const y = event.clientY - button.getBoundingClientRect().top;
+    const span = document.createElement('span');
+    span.style.left = x + 'px';
+    span.style.top = y + 'px';
+    button.appendChild(span);
+
+    setTimeout(() => {
+      span.remove();
+    }, 1000);
   });
-}
-
-carouselPrevButton.addEventListener('click', () => {
-  activeIndex--;
-  if (activeIndex < 0) {
-    activeIndex = carouselItems.length - 1;
-  }
-  updateCarousel();
 });
 
-carouselNextButton.addEventListener('click', () => {
-  activeIndex++;
-  if (activeIndex >= carouselItems.length) {
-    activeIndex = 0;
+//our story part
+
+
+//products
+
+const productData = [
+  {
+    title: 'Product 1',
+    image: 'images/beer.png',
+    description: 'Product 1 description',
+    price: '$99.99'
+  },
+  {
+    title: 'Product 2',
+    image: 'images/beer.png',
+    description: 'Product 2 description',
+    price: '$119.99'
+  },
+  {
+    title: 'Product 3',
+    image: 'images/beer.png',
+    description: 'Product 3 description',
+    price: '$89.99'  },
+  {
+    title: 'Product 4',
+    image: 'images/beer.png',
+    description: 'Product 4 description',
+    price: '$129.99'
   }
-  updateCarousel();
-});
+];
 
-//auto slide anim
-const autoSlideInterval = 5000; // Duration between slides in milliseconds (5000ms = 5 seconds)
+const grid = document.querySelector('.grid');
 
-function autoSlide() {
-  activeIndex++;
-  if (activeIndex >= carouselItems.length) {
-    activeIndex = 0;
-  }
-  updateCarousel();
-}
-
-const slideInterval = setInterval(autoSlide, autoSlideInterval);
-
-carouselPrevButton.addEventListener('click', () => {
-  clearInterval(slideInterval);
-  activeIndex--;
-  if (activeIndex < 0) {
-    activeIndex = carouselItems.length - 1;
-  }
-  updateCarousel();
-  setInterval(autoSlide, autoSlideInterval);
-});
-
-carouselNextButton.addEventListener('click', () => {
-  clearInterval(slideInterval);
-  activeIndex++;
-  if (activeIndex >= carouselItems.length) {
-    activeIndex = 0;
-  }
-  updateCarousel();
-  setInterval(autoSlide, autoSlideInterval);
-});
-
-//loading bar for slides 
-function updateCarousel() {
-  carouselItems.forEach((item, index) => {
-    if (index === activeIndex) {
-      item.style.display = 'block';
-      item.classList.add('active');
-    } else {
-      item.style.display = 'none';
-      item.classList.remove('active');
-    }
+productData.forEach((product, index) => {
+  const productItem = document.createElement('div');
+  productItem.classList.add('product-item');
+  productItem.innerHTML = `
+    <img src="${product.image}" alt="${product.title}">
+    <h2>${product.title}</h2>
+    <h3>${product.price}</h3>
+    <button class="buy-now">Buy Now</button>
+  `;
+  productItem.querySelector('.buy-now').addEventListener('click', () => {
+    openModal(index);
   });
+  grid.appendChild(productItem);
+});
+
+const modal = document.getElementById('productModal');
+const closeModal = document.querySelector('.close');
+closeModal.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+function openModal(index) {
+  const product = productData[index];
+  const modalImage = document.querySelector('.modal-image');
+  const modalTitle = document.querySelector('.modal-title');
+  const modalDescription = document.querySelector('.modal-description');
+  const modalPrice = document.querySelector('.modal-price');
+
+  modalImage.src = product.image;
+  modalTitle.textContent = product.title;
+  modalDescription.textContent = product.description;
+  modalPrice.textContent = product.price;
+
+  modal.style.display = 'block';
 }
+
+window.addEventListener('click', (event) => {
+  if (event.target == modal) {
+    modal.style.display = 'none';
+  }
+});
