@@ -50,27 +50,27 @@ buttons.forEach((button) => {
 
 const productData = [
   {
-    title: 'Product 1',
-    image: 'images/beer.png',
-    description: 'Product 1 description',
-    price: '$99.99'
+    title: 'Classic',
+    image: 'images/product-1.png',
+    description: 'Discover the rich, bold flavors of our 0.33ml dark beer, masterfully crafted in a sleek bottle to elevate your drinking experience.',
+    price: '$7.99'
   },
   {
-    title: 'Product 2',
-    image: 'images/beer.png',
-    description: 'Product 2 description',
-    price: '$119.99'
+    title: 'Pale Ale',
+    image: 'images/product-2.png',
+    description: 'Savor the crisp, refreshing taste of our 0.33ml pale ale, expertly brewed and presented in a stylish bottle for a delightful drinking experience.',
+    price: '$6.99'
   },
   {
-    title: 'Product 3',
-    image: 'images/beer.png',
-    description: 'Product 3 description',
-    price: '$89.99'  },
+    title: 'Lager',
+    image: 'images/product-3.png',
+    description: 'Indulge in the smooth, well-balanced flavor of our 0.33ml lager beer, bottled to perfection for a satisfying and enjoyable drinking experience.',
+    price: '$7.99'  },
   {
-    title: 'Product 4',
-    image: 'images/beer.png',
-    description: 'Product 4 description',
-    price: '$129.99'
+    title: 'Cider',
+    image: 'images/product-4.png',
+    description: 'Savor the crisp, refreshing taste of our 0.33ml cider, carefully bottled to deliver a delightful blend of natural fruitiness and subtle sweetness.',
+    price: '$5.99'
   }
 ];
 
